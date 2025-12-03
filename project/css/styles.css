@@ -148,6 +148,7 @@ main {
   border-radius: 999px; /* Скруглённые края */
   font-size: 0.9rem;
   color: #4b5563;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease; /* Плавные переходы для меню */
 }
 
 /* Эффект при наведении на пункт меню */
@@ -181,6 +182,7 @@ main {
   justify-content: center;
   align-items: center;
   gap: 3px;
+  transition: background-color 0.2s ease; /* Плавное изменение фона при hover */
 }
 
 /* Каждая полоска бургера */
@@ -190,6 +192,7 @@ main {
   height: 2px;
   border-radius: 999px;
   background-color: #111827;
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Плавное превращение в крестик */
 }
 
 /* Эффект при наведении на бургер */
@@ -649,12 +652,16 @@ main {
     border: 1px solid rgba(148, 163, 184, 0.6);
     opacity: 0; /* Скрыто по умолчанию */
     pointer-events: none; /* Не реагирует на клики */
+    transform: translateY(-10px); /* Начальное смещение вверх */
+    transition: opacity 0.3s ease, transform 0.3s ease, pointer-events 0s 0.3s; /* Плавное появление меню */
   }
 
   /* Видимое состояние меню (когда открыто) */
   body.nav-open .nav-list {
     opacity: 1;
     pointer-events: auto;
+    transform: translateY(0); /* Возвращаем на место */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Плавное появление */
   }
 
   /* Карточки в одну колонку на мобильных */

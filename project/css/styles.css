@@ -1,0 +1,687 @@
+/* ============================================
+   БАЗОВЫЕ СТИЛИ
+   ============================================ */
+
+/* Сброс box-sizing для всех элементов - padding и border включаются в ширину элемента */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Основные стили для body: шрифт, цвет текста, фон страницы */
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #111827;
+  background-color: #f3f4f6;
+  -webkit-font-smoothing: antialiased; /* Сглаживание шрифта для лучшей читаемости */
+}
+
+/* Изображения адаптивные - не выходят за границы контейнера */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Ссылки наследуют цвет текста и убрано подчёркивание по умолчанию */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Минимальная высота для основного контента */
+main {
+  min-height: 60vh;
+}
+
+/* ============================================
+   КОНТЕЙНЕРЫ И СЕКЦИИ
+   ============================================ */
+
+/* Центрированный контейнер с максимальной шириной и отступами по бокам */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Вертикальные отступы для секций контента */
+.section {
+  padding: 56px 0;
+}
+
+/* Разделительная линия между секциями */
+.section + .section {
+  border-top: 1px solid rgba(15, 23, 42, 0.04);
+}
+
+/* Стили для заголовков внутри секций */
+.section h1,
+.section h2 {
+  margin: 0 0 16px;
+  font-weight: 600;
+  letter-spacing: -0.03em; /* Уменьшенный межбуквенный интервал для современного вида */
+}
+
+/* Вводный текст под заголовком секции */
+.section-intro {
+  margin: 0 0 32px;
+  max-width: 640px;
+  color: #4b5563;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+/* ============================================
+   ШАПКА И НАВИГАЦИЯ
+   ============================================ */
+
+/* Фиксированная шапка, которая остаётся видимой при прокрутке */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20; /* Поверх других элементов */
+  background: rgba(248, 250, 252, 0.9); /* Полупрозрачный фон */
+  backdrop-filter: blur(16px); /* Размытие фона для эффекта "стекла" */
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+/* Внутренний контейнер шапки - flex для размещения логотипа и меню */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+}
+
+/* Логотип сайта */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #111827;
+}
+
+/* Круглая иконка с градиентом в логотипе */
+.logo-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px; /* Полностью круглый */
+  background: linear-gradient(135deg, #4f46e5, #0ea5e9); /* Градиент от синего к голубому */
+  color: #f9fafb;
+  font-size: 0.8rem;
+}
+
+/* Текст логотипа */
+.logo-text {
+  letter-spacing: -0.03em;
+}
+
+/* Контейнер навигации */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Список пунктов меню */
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Ссылка в меню навигации */
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px; /* Скруглённые края */
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+/* Эффект при наведении на пункт меню */
+.nav-link:hover {
+  background-color: rgba(15, 23, 42, 0.06);
+  color: #111827;
+}
+
+/* Стиль для активной (текущей) страницы в меню */
+.nav-link.is-active {
+  background: #111827;
+  color: #f9fafb;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.2);
+}
+
+/* ============================================
+   БУРГЕР-МЕНЮ (для мобильных устройств)
+   ============================================ */
+
+/* Кнопка бургер-меню (три полоски) - скрыта по умолчанию */
+.burger {
+  display: none;
+  flex-direction: column;
+  width: 32px;
+  height: 32px;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  background: #f9fafb;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+/* Каждая полоска бургера */
+.burger span {
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background-color: #111827;
+}
+
+/* Эффект при наведении на бургер */
+.burger:hover {
+  background-color: #e5e7eb;
+}
+
+/* Превращение первой полоски в крестик при открытии */
+.burger.is-open span:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+
+/* Скрытие средней полоски */
+.burger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+/* Превращение третьей полоски в крестик */
+.burger.is-open span:nth-child(3) {
+  transform: translateY(-5px) rotate(-45deg);
+}
+
+/* ============================================
+   ГЛАВНАЯ СТРАНИЦА (HERO)
+   ============================================ */
+
+/* Главный блок на главной странице */
+.hero {
+  padding-top: 72px;
+}
+
+/* Внутренний контейнер hero - сетка из двух колонок */
+.hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr); /* Левая колонка шире */
+  gap: 40px;
+  align-items: center;
+}
+
+/* Маленький текст над заголовком (например, "Школьный проект") */
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  color: #6b7280;
+  margin: 0 0 12px;
+}
+
+/* Главный заголовок с адаптивным размером */
+.hero h1 {
+  font-size: clamp(1.85rem, 3vw, 2.4rem); /* Адаптивный размер между минимумом и максимумом */
+  line-height: 1.15;
+  margin: 0 0 14px;
+}
+
+/* Описание под заголовком */
+.hero-description {
+  margin: 0 0 24px;
+  color: #4b5563;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+/* Контейнер для кнопок действий */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Карточка справа на главной странице с градиентным фоном */
+.hero-card {
+  background: radial-gradient(circle at top left, #eef2ff, #e0f2fe); /* Радиальный градиент */
+  border-radius: 18px;
+  padding: 22px 22px 20px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+}
+
+/* Цитата в hero-карточке */
+.hero-quote {
+  margin: 0 0 16px;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #111827;
+}
+
+/* Список преимуществ в hero-карточке */
+.hero-list {
+  margin: 0;
+  padding-left: 18px;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+/* ============================================
+   КНОПКИ
+   ============================================ */
+
+/* Базовые стили для всех кнопок */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 18px;
+  border-radius: 999px; /* Полностью скруглённые края */
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+/* Основная кнопка с градиентом и тенью */
+.btn.primary {
+  background: linear-gradient(135deg, #4f46e5, #0ea5e9);
+  color: #f9fafb;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.35);
+}
+
+/* Эффект при наведении на основную кнопку */
+.btn.primary:hover {
+  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.4); /* Усиленная тень */
+}
+
+/* Вторичная кнопка с прозрачным фоном */
+.btn.ghost {
+  background: transparent;
+  border-color: rgba(148, 163, 184, 0.7);
+  color: #111827;
+}
+
+/* Эффект при наведении на вторичную кнопку */
+.btn.ghost:hover {
+  background-color: rgba(15, 23, 42, 0.04);
+}
+
+/* ============================================
+   КАРТОЧКИ РЕСУРСОВ
+   ============================================ */
+
+/* Сетка для размещения карточек */
+.grid {
+  display: grid;
+  gap: 18px;
+}
+
+/* Сетка из трёх колонок для карточек */
+.cards-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Ссылка-обёртка для карточки */
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Карточка ресурса с тенью и рамкой */
+.card {
+  background: #f9fafb;
+  border-radius: 16px;
+  padding: 18px 18px 16px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  box-shadow: 0 16px 45px rgba(15, 23, 42, 0.08);
+}
+
+/* Заголовки внутри карточки */
+.card h2,
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 1.02rem;
+}
+
+/* Текст внутри карточки */
+.card p {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+/* Эффект при наведении на карточку */
+.card:hover {
+  box-shadow: 0 18px 60px rgba(15, 23, 42, 0.16); /* Усиленная тень */
+  border-color: rgba(79, 70, 229, 0.7); /* Синяя рамка */
+  background-color: #fdfdfd;
+}
+
+/* Автор или источник ресурса */
+.resource-author {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+/* Ссылка на ресурс внутри карточки */
+.resource-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.86rem;
+  color: #2563eb;
+}
+
+/* Подчёркивание ссылки при наведении */
+.resource-link:hover {
+  text-decoration: underline;
+}
+
+/* Тег/метка на карточке (например, "Учебник", "Видео") */
+.card-tag {
+  display: inline-flex;
+  margin-top: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: #e5e7eb;
+  color: #374151;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* ============================================
+   ТЕМЫ ЕГЭ
+   ============================================ */
+
+/* Список карточек с темами ЕГЭ */
+.topics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Карточка отдельной темы ЕГЭ */
+.topic-card {
+  background: #f9fafb;
+  border-radius: 16px;
+  padding: 16px 18px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+/* Заголовок темы */
+.topic-header h2 {
+  font-size: 1rem;
+  margin: 0 0 4px;
+}
+
+/* Описание темы */
+.topic-header p {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+/* Список ссылок по теме */
+.topic-links {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.88rem;
+}
+
+/* Ссылки в списке тем */
+.topic-links a {
+  color: #2563eb;
+}
+
+/* Подчёркивание ссылок при наведении */
+.topic-links a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================
+   ПОИСК
+   ============================================ */
+
+/* Панель с полями поиска */
+.search-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+/* Поле ввода (текст или select) */
+.search-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 220px;
+  flex: 1 1 260px; /* Гибкая ширина */
+}
+
+/* Подпись над полем ввода */
+.search-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #6b7280;
+  letter-spacing: 0.18em;
+}
+
+/* Поле ввода текста и выпадающий список */
+.search-input,
+.search-select {
+  padding: 9px 12px;
+  border-radius: 999px; /* Скруглённые края */
+  border: 1px solid rgba(148, 163, 184, 0.9);
+  background-color: #f9fafb;
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  appearance: none; /* Убираем стандартные стрелки браузера */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+/* Стилизация выпадающего списка с кастомной стрелкой */
+.search-select {
+  padding-right: 36px; /* Место для стрелки */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234b5563' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+}
+
+/* Эффект при фокусе на поле ввода */
+.search-input:focus,
+.search-select:focus {
+  border-color: #4f46e5; /* Синяя рамка */
+  box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.4); /* Синее свечение */
+  background-color: #ffffff;
+}
+
+/* Эффект при наведении на select */
+.search-select:hover {
+  border-color: rgba(79, 70, 229, 0.5);
+  background-color: #ffffff;
+}
+
+/* Изменение цвета стрелки при фокусе */
+.search-select:focus {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234f46e5' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+}
+
+/* Подсказка под полями поиска */
+.search-hint {
+  margin: 0 0 18px;
+  font-size: 0.86rem;
+  color: #6b7280;
+}
+
+/* Сообщение, когда ничего не найдено */
+.search-empty {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* ============================================
+   ФУТЕР
+   ============================================ */
+
+/* Подвал сайта */
+.site-footer {
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  padding: 22px 0 24px;
+  background-color: #f9fafb;
+}
+
+/* Внутренний контейнер футера */
+.footer-inner {
+  font-size: 0.82rem;
+  color: #6b7280;
+}
+
+/* Дополнительная информация в футере */
+.footer-meta {
+  margin: 4px 0 0;
+  color: #9ca3af;
+}
+
+/* ============================================
+   КНОПКА "НАВЕРХ"
+   ============================================ */
+
+/* Фиксированная кнопка для прокрутки наверх страницы */
+.scroll-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px; /* Круглая */
+  border: 1px solid rgba(148, 163, 184, 0.85);
+  background-color: #f9fafb;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.18);
+  opacity: 0; /* Скрыта по умолчанию */
+  pointer-events: none; /* Не реагирует на клики когда скрыта */
+}
+
+/* Видимое состояние кнопки (когда прокрутили вниз) */
+.scroll-top.is-visible {
+  opacity: 1;
+  pointer-events: auto; /* Теперь реагирует на клики */
+}
+
+/* Эффект при наведении на кнопку */
+.scroll-top:hover {
+  background-color: #e5e7eb;
+}
+
+/* ============================================
+   АДАПТИВНОСТЬ (МЕДИА-ЗАПРОСЫ)
+   ============================================ */
+
+/* Планшеты и маленькие экраны (до 900px) */
+@media (max-width: 900px) {
+  /* Hero-блок становится одной колонкой */
+  .hero-inner {
+    grid-template-columns: minmax(0, 1.2fr);
+  }
+
+  /* Карточка справа перемещается вверх */
+  .hero-card {
+    order: -1;
+  }
+}
+
+/* Мобильные устройства (до 768px) */
+@media (max-width: 768px) {
+  /* Отступы в шапке */
+  .header-inner {
+    padding-inline: 16px;
+  }
+
+  /* Показываем бургер-меню */
+  .burger {
+    display: flex;
+  }
+
+  /* Меню становится выпадающим списком */
+  .nav-list {
+    position: fixed;
+    inset: 56px 16px auto; /* Позиционирование под шапкой */
+    padding: 8px;
+    flex-direction: column;
+    border-radius: 14px;
+    background: rgba(248, 250, 252, 0.97);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.28);
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    opacity: 0; /* Скрыто по умолчанию */
+    pointer-events: none; /* Не реагирует на клики */
+  }
+
+  /* Видимое состояние меню (когда открыто) */
+  body.nav-open .nav-list {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Карточки в одну колонку на мобильных */
+  .cards-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Уменьшенные отступы секций */
+  .section {
+    padding: 36px 0;
+  }
+}
+
+/* Маленькие мобильные устройства (до 480px) */
+@media (max-width: 480px) {
+  /* Уменьшенный заголовок */
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  /* Меньший отступ между элементами */
+  .hero-inner {
+    gap: 24px;
+  }
+
+  /* Уменьшенные отступы в карточках */
+  .card {
+    padding: 16px 14px 14px;
+  }
+}
